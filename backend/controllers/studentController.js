@@ -58,6 +58,15 @@ const stuDataEditSave=async(req, res)=>{
     res.send("Data succesfully updated!!!");
 }
 
+const stuSearchByName=async(req, res)=>{
+    let empnm= req.query.empname;
+   console.log(req.query);
+   const docs = await StuModel.find({ empname: { $regex: empnm } });
+   console.log(docs)
+   res.send(docs);
+}
+
+
 module.exports={
     stuDataSave,
     stuDataDisplay,
@@ -65,5 +74,6 @@ module.exports={
     stuUpdateDataDisplay,
     stuDataDelete,
     stuDataEdit,
-    stuDataEditSave
+    stuDataEditSave,
+    stuSearchByName
 }

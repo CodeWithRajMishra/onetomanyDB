@@ -6,6 +6,7 @@ import Display from "./pages/Display";
 import Search from "./pages/Search";
 import Update from "./pages/Update";
 import EditData from "./pages/EditData";
+import SearchByName from "./pages/SearchByName";
 const App=()=>{
   return(
     <>
@@ -19,6 +20,7 @@ const App=()=>{
          <Route path="search" element={<Search/>} />
          <Route path="update" element={<Update/>} />
          <Route path="editdata/:empid" element={<EditData/>}/>
+         <Route path="searchbyname" element={<SearchByName/>}/>
         </Route>
        </Routes>
      </BrowserRouter>
