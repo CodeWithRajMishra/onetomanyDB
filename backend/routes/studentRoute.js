@@ -8,6 +8,7 @@ route.post("/studentsearch", stuController.stuDataSearch);
 route.get("/studentupdatedisplay", stuController.stuUpdateDataDisplay);
 route.post("/studentdatadelete", stuController.stuDataDelete);
 route.post("/studenteditdata", stuController.stuDataEdit);
+route.post("/studenteditsave", stuController.stuDataEditSave);
 
 
 module.exports=route;

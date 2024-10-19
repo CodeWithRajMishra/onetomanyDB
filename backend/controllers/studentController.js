@@ -30,7 +30,6 @@ const stuDataSearch=async(req, res)=>{
          const myData=await     StuModel.find({empno:empno})         
          res.send(myData);
 }
-
 const stuUpdateDataDisplay=async(req, res)=>{
      const Data= await StuModel.find();
      res.send(Data);
@@ -41,11 +40,22 @@ const stuDataDelete=async(req, res)=>{
    const student=await  StuModel.findByIdAndDelete(myid);   
    res.send("record deleted!")
 }
-
 const stuDataEdit=async(req, res)=>{
     const id=req.body.id;
     const studata= await  StuModel.findById(id);
     res.send(studata);
+}
+const stuDataEditSave=async(req, res)=>{
+    const {_id, empno, empname, designation, salary} = req.body;
+
+    const studata= await StuModel.findByIdAndUpdate(_id, {
+       empno:empno,
+       empname:empname,
+       designation:designation,
+       salary:salary
+    })
+   
+    res.send("Data succesfully updated!!!");
 }
 
 module.exports={
@@ -54,5 +64,6 @@ module.exports={
     stuDataSearch,
     stuUpdateDataDisplay,
     stuDataDelete,
-    stuDataEdit
+    stuDataEdit,
+    stuDataEditSave
 }
