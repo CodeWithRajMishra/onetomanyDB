@@ -4,7 +4,7 @@ const bodyparser = require('body-parser')
 const cors= require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const stuRoute= require("./routes/studentRoute");
+const empRoute= require("./routes/employeeRoute");
 mongoose.connect(process.env.DBCONNECTION).then(()=>{
     console.log("DB Succesfully Connected");
 });
@@ -13,7 +13,7 @@ app.use(cors());
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
-app.use("/students", stuRoute);
+app.use("/employees", empRoute);
 app.listen(port, ()=>{
     console.log(`server run on ${port}!!!`);
 })
