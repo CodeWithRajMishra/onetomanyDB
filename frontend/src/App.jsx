@@ -1,26 +1,37 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
-import Contact from "./pages/Contact";
-import DashBoard from "./pages/DashBoard";
+import { useState } from "react";
+import axios from "axios";
 const App=()=>{
+ 
+  const [fileData, setFileData]= useState();
+ 
+  const handleFileChange=(e)=>{
+  console.log(e.target.files);
+  setFileData(e.target.files[0]);
+  console.log(fileData);
+ }
+
+const handleSubmit=async()=>{
+  const formData = new FormData();
+  formData.append('file', fileData);
+  let api="http://localhost:8080/upload";
+  const response= await axios.post(api, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  console.log(response);
+
+  alert("file Uploaded!");
+}
+
   return(
     <>
-     <BrowserRouter>
-       <Routes>
-        <Route path="/" element={<Layout/>}>
-         <Route index element={<Home/>}/>
-         <Route path="home" element={<Home/>}/>
-         <Route path="login" element={<Login/>}/>
-         <Route path="registration" element={<Registration/>}/>
-         <Route path="contact" element={<Contact/>} />
-         <Route path="dashboard" element={<DashBoard/>} />
-        </Route>
-       </Routes>
-     </BrowserRouter>
+      <h1> Welcome To File Uploading</h1>
+      Upload image : <input type="file" onChange={handleFileChange} />
+      <br/>
+      <button onClick={handleSubmit}>Upload!</button>
     </>
   )
 }
+
 export default App;

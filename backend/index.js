@@ -1,19 +1,28 @@
 const express = require("express");
 const app=express();
+const multer = require('multer');
 const bodyparser = require('body-parser')
 const cors= require("cors");
-const mongoose = require("mongoose");
 require("dotenv").config();
-const empRoute= require("./routes/employeeRoute");
-mongoose.connect(process.env.DBCONNECTION).then(()=>{
-    console.log("DB Succesfully Connected");
-});
+
 const port=process.env.PORT || 3000
 app.use(cors());
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
-app.use("/employees", empRoute);
+const storage=multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, "photos/")
+    },
+    filename:(req, file, cb)=>{
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage });
+app.post("/upload", upload.single('file'), (req, res)=>{
+     res.send("Your File Succesfully Uploaded");
+})
+
 app.listen(port, ()=>{
     console.log(`server run on ${port}!!!`);
 })
