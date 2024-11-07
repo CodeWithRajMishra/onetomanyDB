@@ -1,35 +1,50 @@
 import { useState } from "react";
 import axios from "axios";
 const App=()=>{
- 
-  const [fileData, setFileData]= useState();
- 
-  const handleFileChange=(e)=>{
-  console.log(e.target.files);
-  setFileData(e.target.files[0]);
-  console.log(fileData);
- }
-
 const handleSubmit=async()=>{
-  const formData = new FormData();
-  formData.append('file', fileData);
-  let api="http://localhost:8080/upload";
-  const response= await axios.post(api, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+  let api="http://localhost:8080/home";
+  axios.get(api).then((res)=>{
+    console.log(res.data);
   })
-  console.log(response);
+}
 
-  alert("file Uploaded!");
+const handleSubmit1=async()=>{
+  let api="http://localhost:8080/about";
+  axios.get(api).then((res)=>{
+    console.log(res.data);
+  })
+}
+const handleSubmit2=async()=>{
+  let api="http://localhost:8080/service";
+  axios.get(api).then((res)=>{
+    console.log(res.data);
+  })
+}
+
+const handleSubmit3=async()=>{
+  let api="http://localhost:8080/join";
+  axios.get(api).then((res)=>{
+    console.log(res.data);
+  })
+}
+const handleSubmit4=async()=>{
+  let api="http://localhost:8080/contact";
+  axios.get(api).then((res)=>{
+    console.log(res.data);
+  })
 }
 
   return(
     <>
-      <h1> Welcome To File Uploading</h1>
-      Upload image : <input type="file" onChange={handleFileChange} />
+      <h1> Welcome To Error Handeling</h1>
+    
       <br/>
-      <button onClick={handleSubmit}>Upload!</button>
+      <button onClick={handleSubmit}>Home!</button>
+      <button onClick={handleSubmit1}>About!</button>
+      <button onClick={handleSubmit2}>Service!</button>
+      <button onClick={handleSubmit3}>Join!</button>
+      <button onClick={handleSubmit4}>Contact!</button>
+    
     </>
   )
 }

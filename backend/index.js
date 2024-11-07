@@ -1,27 +1,49 @@
 const express = require("express");
 const app=express();
-const multer = require('multer');
 const bodyparser = require('body-parser')
 const cors= require("cors");
-require("dotenv").config();
+const errHandler= require("./middleware/errorHandler");
 
+require("dotenv").config();
 const port=process.env.PORT || 3000
 app.use(cors());
 // Body-parser middleware
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
-const storage=multer.diskStorage({
-    destination: (req, file, cb)=>{
-        cb(null, "photos/")
-    },
-    filename:(req, file, cb)=>{
-        cb(null, file.originalname)
-    }
+app.get("/home", (req, res)=>{
+   res.send("My home page");
 })
-const upload = multer({ storage: storage });
-app.post("/upload", upload.single('file'), (req, res)=>{
-     res.send("Your File Succesfully Uploaded");
+app.get("/about", (req, res,next)=>{
+   try {
+      let a=10;
+      let b=0;
+       if (b==0)
+       {
+         throw new Error("App zero se divide na kare!!!");
+       }
+      let c=a/b;
+      res.status(200).send({ans:c});
+   } catch (error) {
+       next(error)
+   }
 })
+
+
+app.get("/service", (req, res, next)=>{
+   // code may generate error
+   const err= new Error("ye service ka error message hai!");
+   next(err);
+})
+app.get("/join", (req, res)=>{
+   res.send("My Join page");
+})
+app.get("/contact", (req, res, next)=>{
+    const err= new Error("ye contact page ki error hai!");
+    next(err);
+})
+
+
+app.use(errHandler);
 
 app.listen(port, ()=>{
     console.log(`server run on ${port}!!!`);
