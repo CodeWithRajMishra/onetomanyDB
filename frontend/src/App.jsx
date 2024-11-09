@@ -1,50 +1,21 @@
-import { useState } from "react";
-import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+import Home from "./Home";
+import Display from "./Display";
+import Insert from "./Insert";
 const App=()=>{
-const handleSubmit=async()=>{
-  let api="http://localhost:8080/home";
-  axios.get(api).then((res)=>{
-    console.log(res.data);
-  })
-}
-
-const handleSubmit1=async()=>{
-  let api="http://localhost:8080/about";
-  axios.get(api).then((res)=>{
-    console.log(res.data);
-  })
-}
-const handleSubmit2=async()=>{
-  let api="http://localhost:8080/service";
-  axios.get(api).then((res)=>{
-    console.log(res.data);
-  })
-}
-
-const handleSubmit3=async()=>{
-  let api="http://localhost:8080/join";
-  axios.get(api).then((res)=>{
-    console.log(res.data);
-  })
-}
-const handleSubmit4=async()=>{
-  let api="http://localhost:8080/contact";
-  axios.get(api).then((res)=>{
-    console.log(res.data);
-  })
-}
-
   return(
     <>
-      <h1> Welcome To Error Handeling</h1>
-    
-      <br/>
-      <button onClick={handleSubmit}>Home!</button>
-      <button onClick={handleSubmit1}>About!</button>
-      <button onClick={handleSubmit2}>Service!</button>
-      <button onClick={handleSubmit3}>Join!</button>
-      <button onClick={handleSubmit4}>Contact!</button>
-    
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Home/>}/>
+          <Route path="home" element={<Home/>}/>
+          <Route path="insert" element={<Insert/>}/>
+          <Route path="display" element={<Display/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>      
     </>
   )
 }
