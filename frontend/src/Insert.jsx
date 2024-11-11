@@ -10,7 +10,7 @@ const Insert=()=>{
   }
 
   const handleSubmit=()=>{
-    let api="http://localhost:8080/employee/usersave";
+    let api="http://localhost:8080/books/booksave";
     axios.post(api, input).then((res)=>{
         console.log(res);
         alert("Data save!!!");
@@ -20,21 +20,17 @@ const Insert=()=>{
     return(
         <>
           <h1> Insert Page</h1>
-          Enter Username : <input type="text" name="username"
-           value={input.username} onChange={handleInput} />
+          Enter Authername : <input type="text" name="authorname"
+           value={input.authorname} onChange={handleInput} />
           <br/>
-          Enter Email : <input type="text"  name="email"
-           value={input.email} onChange={handleInput} />
+          Enter Book Name : <input type="text"  name="bookname"
+           value={input.bookname} onChange={handleInput} />
           <br/>
-          Enter First name : <input type="text"  name="fname"
-           value={input.fname} onChange={handleInput} />
-          <br/>
-          Enter Second name : <input type="text"  name="sname"
-           value={input.sname} onChange={handleInput} />
-          <br/>
+          Enter Price : <input type="text"  name="bookprice"
+           value={input.bookprice} onChange={handleInput} />
+           <br/>
           <button onClick={handleSubmit}> Click </button>
         </>
     )
 }
-
 export default Insert;

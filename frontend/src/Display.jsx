@@ -5,25 +5,15 @@ const Display=()=>{
  const [mydata, setMydata]= useState([]);
 
  const loadData=()=>{
-  let api="http://localhost:8080/employee/userdisplay";
+  let api="http://localhost:8080/books/booksdisplay";
   axios.get(api).then((res)=>{
     console.log(res.data);
     setMydata(res.data);
   })
  }
 
-const ans=mydata.map((key)=>{
-    return(
-      <>
-        <tr>
-          <td> {key.firstname}</td>
-          <td> {key.secondname}</td>
-          <td> {key.userid.username}</td>
-          <td> {key.userid.email}</td>
-        </tr>
-      </>
-    )
-})
+
+
 
 useEffect(()=>{
   loadData();
@@ -40,7 +30,7 @@ useEffect(()=>{
               <th> Email</th>
 
             </tr>
-            {ans}
+           
           </table>
         </>
     )

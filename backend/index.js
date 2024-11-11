@@ -3,7 +3,7 @@ const app=express();
 const bodyparser = require('body-parser')
 const cors= require("cors");
 const mongoose= require("mongoose");
-const empRoute= require("./routes/employeeRoute");
+const bookRoute= require("./routes/bookRoute");
 require("dotenv").config();
 mongoose.connect(process.env.DBCONNECTION).then(()=>{
     console.log("DB Connected Succesfully!");
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 
-app.use("/employee", empRoute);
+app.use("/books", bookRoute);
 
 
 app.listen(port, ()=>{
