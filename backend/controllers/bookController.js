@@ -13,13 +13,26 @@ const bookSave=async(req, res)=>{
   await Author.findByIdAndUpdate(author._id,{$push:{author_books:book._id}})
  res.send(author);   
 }
-
 const bookDisplay=async(req, res)=>{
        const authorData= await Author.find().populate('author_books');
        res.send(authorData);
 }
 
+const morebookAdd=async(req, res)=>{
+     const {id, bname, bprice} = req.body;
+   
+     const book = await Book.create({
+      book_name: bname,
+      book_price:bprice,
+      author_id:id
+     })
+ 
+     await Author.findByIdAndUpdate(id,{$push:{author_books:book._id}})
+
+     res.send("Ok new book added");
+}
 module.exports={
     bookSave,
-    bookDisplay
+    bookDisplay,
+    morebookAdd
 }

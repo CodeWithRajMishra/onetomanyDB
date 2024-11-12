@@ -5,6 +5,6 @@ route.post("/booksave",  bookController.bookSave);
 
 route.get("/booksdisplay",  bookController.bookDisplay);
 
-
+route.post("/morebookadd",  bookController.morebookAdd);
 
 module.exports=route;
